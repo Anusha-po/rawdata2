@@ -26,6 +26,12 @@
 		"HttpServer1_properties_typeProperties_userName": {
 			"value": "abc"
 		},
+		"HttpServer2_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com/TanGSaN02/MSFT-Apprenticeship-Demo-Project/refs/heads/main/StockMovement%202.csv"
+		},
+		"HttpServer2_properties_typeProperties_userName": {
+			"value": "abc"
+		},
 		"ls1_properties_typeProperties_url": {
 			"value": "https://storageaccdemop1.dfs.core.windows.net/"
 		},

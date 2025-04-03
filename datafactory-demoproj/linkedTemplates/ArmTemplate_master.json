@@ -35,6 +35,14 @@
 			"type": "string",
 			"defaultValue": "abc"
 		},
+		"HttpServer2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://raw.githubusercontent.com/TanGSaN02/MSFT-Apprenticeship-Demo-Project/refs/heads/main/StockMovement%202.csv"
+		},
+		"HttpServer2_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "abc"
+		},
 		"ls1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://storageaccdemop1.dfs.core.windows.net/"
@@ -89,6 +97,12 @@
 					},
 					"ls1_properties_typeProperties_url": {
 						"value": "[parameters('ls1_properties_typeProperties_url')]"
+					},
+					"HttpServer2_properties_typeProperties_url": {
+						"value": "[parameters('HttpServer2_properties_typeProperties_url')]"
+					},
+					"HttpServer2_properties_typeProperties_userName": {
+						"value": "[parameters('HttpServer2_properties_typeProperties_userName')]"
 					}
 				}
 			},

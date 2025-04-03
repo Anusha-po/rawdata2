@@ -35,6 +35,14 @@
 			"type": "string",
 			"defaultValue": "abc"
 		},
+		"HttpServer2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://raw.githubusercontent.com/TanGSaN02/MSFT-Apprenticeship-Demo-Project/refs/heads/main/StockMovement%202.csv"
+		},
+		"HttpServer2_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "abc"
+		},
 		"ls1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://storageaccdemop1.dfs.core.windows.net/"
@@ -174,7 +182,7 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "DelimitedText3",
+								"referenceName": "DelimitedText5",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -194,7 +202,7 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/DelimitedText3')]",
+				"[concat(variables('factoryId'), '/datasets/DelimitedText5')]",
 				"[concat(variables('factoryId'), '/datasets/DelimitedText4')]"
 			]
 		},
@@ -349,6 +357,32 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText5')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "HttpServer2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "HttpServerLocation"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/HttpServer2')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStorage1')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -397,6 +431,32 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/HttpServer2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "HttpServer",
+				"typeProperties": {
+					"url": "[parameters('HttpServer2_properties_typeProperties_url')]",
+					"enableServerCertificateValidation": true,
+					"authenticationType": "Basic",
+					"userName": "[parameters('HttpServer2_properties_typeProperties_userName')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault1",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "secret1"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault1')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/ls1')]",
